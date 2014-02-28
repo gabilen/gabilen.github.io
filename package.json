@@ -1,0 +1,11 @@
+{
+    "author"	: "Gabilen",
+    "name"		: "Gabilen",
+    "version"	: "0.0.1",
+
+    "dependencies" : {
+        "grunt"					: ">= 0.4",
+        "grunt-cli"				: ">= 0.1.6",
+        "grunt-contrib-watch"	: "~0.3.1"
+    }
+}
