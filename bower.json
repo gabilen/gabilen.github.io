@@ -1,0 +1,15 @@
+{
+    "name": "gabilen",
+    "version": "0.0.1",
+    "directory": "js/lib",
+    "dependencies": {
+        "requirejs": ">=2.1.11",
+        "react": ">=0.9.0"
+    },
+    "install" : {
+        "path" : {
+            "css": "content/css",
+            "js":  "js/lib"
+        }
+    }
+}
