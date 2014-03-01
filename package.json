@@ -4,9 +4,10 @@
     "version"	: "0.0.1",
 
     "dependencies" : {
-        "grunt"					: ">= 0.4",
-        "grunt-cli"				: ">= 0.1.6",
-        "grunt-contrib-watch"	: "~0.3.1",
-        "bower"                 : ">= 1.2.8"
+        "grunt" : ">= 0.4",
+        "grunt-cli" : ">= 0.1.6",
+        "grunt-contrib-watch" : "~0.3.1",
+        "grunt-contrib-less": ">= 0.6.4",
+        "bower" : ">= 1.2.8"
     }
 }

@@ -4,24 +4,29 @@ module.exports = function(grunt) {
             files: [
                 './*'
                 , './Gruntfile.js'
+                , './content/css/less'
             ],
-            tasks: ['tratata1', 'tratata2']
+            tasks: ['less']
+        },
+        less: {
+            development: {
+                files: {
+                    './content/css/layout.css': './content/css/less/layout.less'
+                }
+            },
+            production: {
+                options: {
+                    cleancss: true
+                },
+                files: {
+                    './content/css/layout.min.css': './content/css/less/layout.less'
+                }
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-less');
 
-    grunt.registerTask('tratata1', 'Task Tratata1', function(){
-        console.log('tratata1');
-    });
-
-    grunt.registerTask('tratata2', 'Task Tratata2', function(){
-        console.log('tratata2');
-    });
-
-    grunt.registerTask('dev-build', 'Task dev-build', function(){
-        console.log('dev-build');
-    });
-
-    grunt.registerTask('default', ['tratata1', 'tratata2']);
+    grunt.registerTask('default', ['less']);
 };
