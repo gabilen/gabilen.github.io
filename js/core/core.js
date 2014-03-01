@@ -1,5 +1,5 @@
 define([], function () {
-    return function core() {
+    return new function () {
         /**
          * run function and set params
          * @param {function} {array}  function to run, or array with context function and arguments

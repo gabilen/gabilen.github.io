@@ -3,7 +3,6 @@ require.config({
     paths: {
         "config": "configs/config",
         "init": "core/init",
-        "route": "core/route",
-        "core": "core/core"
+        "route": "core/route"
     }
 });
