@@ -1,6 +1,8 @@
 require.config({
     baseUrl: 'js/',
     paths: {
-        "config": "configs/config"
+        "config": "configs/config",
+        "init": "core/init",
+        "route": "core/route"
     }
 });
