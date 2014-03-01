@@ -1,5 +1,7 @@
 define([], function() {
     return {
-        startText: 'Hello World'
+        CONSTANT: {
+            startText: 'Hello World'
+        }
     };
 });
