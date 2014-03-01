@@ -4,8 +4,12 @@
 * trigger events
 * and delete events
 */
-var EventManager = function () {
-    this.initialize();
+define([
+    'core'
+], function () {
+    return function EventManager() {
+        this.initialize();
+    };
 };
 EventManager.prototype = {
     initialize: function () {
@@ -58,7 +62,7 @@ EventManager.prototype = {
         for (order in this.listeners[event]) {
             var func;
             for (func in this.listeners[event][order]) {
-                this.invoke(this.listeners[event][order][func]);
+                core.invoke(this.listeners[event][order][func]);
             }
         }
     },
@@ -70,17 +74,5 @@ EventManager.prototype = {
         if (this.listeners[event]) {
             delete this.listeners[event];
         }
-    },
-    /**
-     * run function and set params
-     * @param {function} {array}  function to run, or array with context function and arguments
-     */
-    invoke: function (func) {
-        if(!func)
-            return this;
-        func instanceof Array
-            ? func[1].apply(func[0], Array.prototype.slice.call(arguments, 1))
-            : func.apply(this, Array.prototype.slice.call(arguments, 1));
-        return this;
     }
 };
