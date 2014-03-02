@@ -3,8 +3,9 @@ require([
 ], function(){
     require([
         'init',
-        'eventManager'
-    ],function(init,EventManager){
+        'core',
+    ],function(init,core){
+        "use strict";
         init();
     });
 });

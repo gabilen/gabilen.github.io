@@ -44,13 +44,17 @@ define([
             if (this.listeners.hasOwnProperty(event)) {
                 if(!callback) {
                     delete this.listeners[event];
-                }
-                else {
+                }else{
+                    var self = this;
+                    var id = undefined;
                     this.listeners[event].forEach(function offEvent (element, index, array) {
-                        if(element === callback) {
-                            element.splice(element, 1);
+                        if(element.toString() === callback.toString()) {
+                            id = index;
                         }
                     });
+                    if(id) {
+                        self.listeners[event].splice(id, 1);
+                    }
                 }
             }
         }
