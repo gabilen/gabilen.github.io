@@ -46,7 +46,7 @@ define([
                     delete this.listeners[event];
                 }else{
                     var self = this;
-                    var id = undefined;
+                    var id = null;
                     this.listeners[event].forEach(function offEvent (element, index, array) {
                         if(element.toString() === callback.toString()) {
                             id = index;
