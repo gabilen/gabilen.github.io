@@ -42,13 +42,13 @@ define([
                     },
                     clear: function() {
                         this.run = false;
-                        this.idStream = 0;
                         this.busy = false;
                         this.callback = null;
                         this.time = 0;
                         this.intervalFunc = null;
                         if (this.idStream) {
                             window.clearTimeout(this.idStream);
+                            this.idStream = 0;
                         }
                         return this;
                     },
@@ -58,7 +58,7 @@ define([
                         this.callback = object.callback;
                         if (!this.time || !this.callback) {
                             this.clear();
-                            return false;
+                            return null;
                         }
                         return this.id;
                     }
@@ -79,7 +79,7 @@ define([
                     });                   
                }               
            }
-            return false;
+           return false;
         };
         
         /**
@@ -90,7 +90,7 @@ define([
                 return false;
             }
             this.streams[id].start();
-            return this;
+            return true;
         };
         
          /**
@@ -101,7 +101,7 @@ define([
                 return false;
             }
             this.streams[id].stop();
-            return this;
+            return true;
         };
         
         /**
@@ -112,7 +112,7 @@ define([
                 return false;
             }
             this.streams[id].clear();
-            return this;
+            return true;
         };
     };
 });
