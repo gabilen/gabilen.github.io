@@ -2,9 +2,9 @@ require([
     'js/configs/config.require'
 ], function(){
     require([
-        'init', 
-        'core' 
-    ], function(init,core){
+        'core/init',
+        '_'
+    ], function(init){
         "use strict";
         init();
     });
