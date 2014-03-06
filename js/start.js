@@ -2,10 +2,10 @@ require([
     'js/configs/config.require'
 ], function(){
     require([
-        'init', 
-        'core',
+        'core/init',
+        '_',
         'router'
-    ], function(init,core,router){
+    ], function(init, _, router){
         "use strict";
         init();
         var router = router();

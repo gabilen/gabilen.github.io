@@ -1,9 +1,10 @@
 define([
-    'route',
-    'config'
-], function(Route, CONFIG){
+    'core/route',
+    'config',
+    'core/logger'
+], function(Route, CONFIG, Logger){
     return function(){
-        console.log(CONFIG.CONSTANT.startText);
+        Logger.log(CONFIG.get('CONSTANT.startText'));
         var route = new Route();
         route.open('start');
     };
