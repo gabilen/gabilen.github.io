@@ -3,8 +3,9 @@
 * Для Работы с роутингом
 */
 define([
-    'core'
-], function (core) {
+    '_',
+	'core/logger'
+], function (core, Logger) {
     "use strict";
     console.log(core);
     var Router = function () {
@@ -28,7 +29,7 @@ define([
         init: function () {
             var hash = location.hash || '/',
                 args = [];
-            console.log(this.routes);
+            Logger.log(this.routes);
 //            this.routes.forEach(function triggerEvent (element, index, array) {
 //               core.invoke(element.callback,args);
 //            });

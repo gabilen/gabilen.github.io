@@ -2,22 +2,22 @@ require([
     'js/configs/config.require'
 ], function(){
     require([
-        'init',
-        'core',
+        'core/init',
+        '_',
         'router'
     ], function(init, core, Router){
         "use strict";
         init();
         var router = new Router();
-//        console.log(router);
-//        console.log(router.routes);
+//        Logger.log(router);
+//        Logger.log(router.routes);
         router.when('/#test', function(){
-            console.log('test');
+            Logger.log('test');
         });
         router.when('/', function(){
-            console.log('main');
+            Logger.log('main');
         });
         router.init();
-        console.log(router.routes);
+        //Logger.log(router.routes);
     });
 });
