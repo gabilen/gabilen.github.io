@@ -3,7 +3,7 @@
 * Для Работы с роутингом
 */
 define([
-    'core/core'
+    'core'
 ], function (core) {
     "use strict";
     var Router = function () {
@@ -14,11 +14,8 @@ define([
         *  
         *
         */
-        when: function (url, template, callback) {
+        when: function (url, callback) {
             this.routes.url = {};
-            if(template) {
-                this.routes.url.template = template;
-            }
             if(callback) {
                 this.routes.url.callback = callback;
             }

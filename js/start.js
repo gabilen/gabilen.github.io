@@ -3,9 +3,15 @@ require([
 ], function(){
     require([
         'init', 
-        'core' 
-    ], function(init,core){
+        'core',
+        'router'
+    ], function(init,core,router){
         "use strict";
         init();
+        var router = router();
+        router.when('/test', function(){
+            console.log('test');
+        });
+        router.init();
     });
 });
