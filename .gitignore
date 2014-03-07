@@ -1,4 +1,4 @@
 .idea
 node_modules
-content/css/less/layout.*.css
+content/css/layout.*
 js/lib
