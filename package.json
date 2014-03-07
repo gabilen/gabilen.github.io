@@ -8,6 +8,11 @@
         "grunt-cli" : ">= 0.1.6",
         "grunt-contrib-watch" : "~0.3.1",
         "grunt-contrib-less": ">= 0.6.4",
-        "bower" : ">= 1.2.8"
+        "less": "~1.7.0",
+        "bower" : ">= 1.2.8",
+        "requirejs": ">=2.1.10",
+        "chai": "*",
+        "mocha": "*",
+        "sinon": "*"
     }
 }
