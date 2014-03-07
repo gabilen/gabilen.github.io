@@ -38,7 +38,7 @@ define(['config'], function (config) {
             };
         },
 
-        log: function (text, color, namespace) {
+        write: function (text, color, namespace) {
             if (config.get('debug') && window.console) {
                 if (!this.namespace.isShow(namespace)) {
                     return;
@@ -54,28 +54,28 @@ define(['config'], function (config) {
             }
         },
 
-        trace: function () {
-            console && console.trace && console.trace();
+        log: function (log, namespace) {
+            return this.write(log, null, namespace);
         },
 
         notice: function (log, namespace) {
-            return this.log(log, 'color: #0074c9; font-weight: bold', namespace);
+            return this.write(log, 'color: #0074c9; font-weight: bold', namespace);
         },
 
         warning: function (log, namespace) {
-            return this.log(log, 'color: #e67e22; font-weight: bold', namespace);
+            return this.write(log, 'color: #e67e22; font-weight: bold', namespace);
         },
 
         success: function (log, namespace) {
-            return this.log(log, 'color: #27ae60; font-weight: bold', namespace);
+            return this.write(log, 'color: #27ae60; font-weight: bold', namespace);
         },
 
         error: function (log, namespace) {
-            return this.log(log, 'color: #d83343; font-weight: bold', namespace);
+            return this.write(log, 'color: #d83343; font-weight: bold', namespace);
         },
 
         alert: function (log, namespace) {
-            return this.log(log, 'color: #8e44ad; font-weight: bold', namespace);
+            return this.write(log, 'color: #8e44ad; font-weight: bold', namespace);
         }
     };
 });
