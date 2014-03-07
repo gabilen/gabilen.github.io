@@ -5,8 +5,9 @@
  * and delete events
  */
 define([
-    'core'
-], function (core) {
+    '_',
+    'core/logger'
+], function (core, Logger) {
     "use strict";
     var EventManager = function () {
         this.listeners = {};
