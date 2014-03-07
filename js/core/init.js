@@ -11,10 +11,10 @@ define([
         router.when('/#test', function(){
             Logger.log('test');
         });
-        router.when('/#test2/:name/:id', function(){
+        router.when('/#test2/:name/:id', function(name, id){
             Logger.log('test2');
-//            Logger.log(name);
-//            Logger.log(id);
+            Logger.log(name);
+            Logger.log(id);
         });
         router.when('/', function(){
             Logger.log('main');

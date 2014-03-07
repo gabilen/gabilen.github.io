@@ -40,10 +40,10 @@ define([
             }
             
             var i = this._routes.length;          
-            while(i--) {               
+            while(i--) {
                 var args = path.match(this._routes[i].pattern);
                 if(args){
-                    core.invoke(this._routes[i].callback, args.slice(1));
+                    core.invoke.apply(this,[].concat(this._routes[i].callback, args.slice(1)));
                 }
             }
         },
