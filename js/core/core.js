@@ -21,8 +21,9 @@ define([], function () {
     }
     return new function () {
         /**
-         * run function and set params
-         * @param {function} {array} callback function to run, or array with context function and arguments
+         * Вызов функции с переданными в нее параметрами (и контекстом)
+         * @param {function} callback Функция для вызова
+         * @param {aray} callback Массив с контекстом и аргументами функции
          */
         this.invoke = function (callback) {
             if (!callback) {

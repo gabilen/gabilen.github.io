@@ -1,8 +1,7 @@
 /**
  * Class EventManager
- * to add events with order to initialize them,
- * trigger events
- * and delete events
+ * Для управления событиями, ихним порядков выполнения
+ * вызов событий и удаления событий или обработчика
  */
 define([
     '_',
@@ -14,10 +13,10 @@ define([
     };
     EventManager.prototype = {
         /**
-         * Add new listener
-         * @param {string} event event name
-         * @param {function} func function to run when fire an event
-         * @return return itself
+         * Добавить обработчик
+         * @param {string} event имя обработчика
+         * @param {function} callback имя функции обратного вызова
+         * @return возвращает саму себя
          */
         on: function (event, callback) {
             if (!this.listeners.hasOwnProperty(event)) {
@@ -29,8 +28,9 @@ define([
             return this;
         },
         /**
-         * trigger listener
-         * @param {string} event name to run event
+         * Триггер
+         * @param {string} event Имя вызываемого события
+         * @param {arguments} args перечень аргументов в функцию обратного вызова
          */
         trigger: function (event, args) {
             this.listeners[event].forEach(function triggerEvent (element, index, array) {
@@ -38,8 +38,12 @@ define([
             });
         },
         /**
-         * Delete listener
-         * @param {string} event name to delete event
+         * Удаление обработчика
+         * Если указанна функция обратного вызова,
+         * она удаляеться из события
+         * иначе удаляеться событие
+         * @param {string} event Имя удаляеммого события
+         * @param {string} event Имя удаляеммой функции из события
          */
         off: function (event, callback) {
             if (this.listeners.hasOwnProperty(event)) {
