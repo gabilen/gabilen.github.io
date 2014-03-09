@@ -5,7 +5,7 @@
  * and delete events
  */
 define([
-    'core/core'
+    '_'
 ], function (core) {
     "use strict";
     var EventManager = function () {

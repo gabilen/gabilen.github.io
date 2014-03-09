@@ -3,9 +3,9 @@ require([
 ], function(){
     require([
         'core/init',
-        '_'
+        '_',
     ], function(init){
         "use strict";
-        init();
+        init();      
     });
 });
