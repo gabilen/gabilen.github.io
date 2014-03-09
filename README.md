@@ -2,18 +2,22 @@
 
 ----
 
-## Installation
+## Installation Unix
 
 Install nodejs
 
-```shell Unix
+```
 npm install
 bower install
 grunt
 ```
 
-```shell Windows
+## Installation Windows
+
+Install nodejs
+
+```
 npm install
 .\win-bower.bat install
 .\win-grunt.bat
-```
+````
