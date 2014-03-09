@@ -7,20 +7,21 @@ define([
         Logger.log(CONFIG.get('CONSTANT.startText'));
         var router = new Router();
         router.when('/#test', function(){
-            Logger.log('testasdasdasdasdasd');
+            Logger.log('test One');
         });
         router.when('/#test2/:name/:id', function(name, id){
-            Logger.log('test2asdasdsadadadad');
-            //Logger.log(name);
-            //Logger.log(id);
+            Logger.log('test Two');
+            Logger.log(name);
+            Logger.log(id);
         });
         router.when('/', function(){
-            Logger.log('mainasdasdasdasd');
+            Logger.log('main');
         });
          router.when('404', function(){
-            Logger.log('errorasdasdasdsad');
+            Logger.log('error');
         });
-        router.init();
-        //router.nav('/#test');
+        router.start();
+
+        window.location.hash = 'test';
     };
 });
