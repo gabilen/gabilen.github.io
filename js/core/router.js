@@ -27,7 +27,8 @@ define([
                 pattern: new RegExp('^'+url.replace(/:\w+/g, '(\\w+)').replace(/\//g, '\\/')+'$'),
                 callback: this.routes[url].callback
             });
-        }       
+        }
+        return this;
     };
     /**
     * инициирует роутер
@@ -37,6 +38,7 @@ define([
     Router.prototype.start = function () {
         window.addEventListener("hashchange", this.checkState.bind(this), false);
         this.checkState();
+        return this;
     };
     /**
     * вызывает обработчик при смене хеша

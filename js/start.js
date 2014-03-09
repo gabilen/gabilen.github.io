@@ -4,7 +4,7 @@ require([
     require([
         'core/init',
         '_'
-    ], function(init, core/*, Router*/){
+    ], function(init, core){
         "use strict";
         init();
     });
