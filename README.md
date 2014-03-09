@@ -2,12 +2,22 @@
 
 ----
 
-## Installation
+## Installation Unix
 
 Install nodejs
 
-```shell
-npm install;
-bower install;
-grunt;
 ```
+npm install
+bower install
+grunt
+```
+
+## Installation Windows
+
+Install nodejs
+
+```
+npm install
+.\win-bower.bat install
+.\win-grunt.bat
+````
