@@ -1,1 +1,4 @@
 .idea
+node_modules
+content/css/layout.*
+js/lib

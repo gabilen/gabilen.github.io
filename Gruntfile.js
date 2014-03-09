@@ -2,9 +2,7 @@ module.exports = function(grunt) {
     grunt.initConfig({
         watch: {
             files: [
-                './*'
-                , './Gruntfile.js'
-                , './content/css/less'
+                './content/css/less'
             ],
             tasks: ['less']
         },
