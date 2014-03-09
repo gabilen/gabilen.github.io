@@ -3,6 +3,8 @@ require.config({
     urlArgs: '0.0.0.1',
     paths: {
         '_': 'core/core',
-        'config': 'configs/config'
+        'config': 'configs/config',
+        'react': 'lib/react',
+        'startapp' : 'controller/start.ctrl'
     }
 });

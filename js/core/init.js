@@ -1,10 +1,9 @@
 define([
     'core/router',
-    'config',
+    'startapp',
     'core/logger'
-], function(Router, CONFIG, Logger){
+], function(Router, StartCtrl, Logger){
     return function(){
-        Logger.log(CONFIG.get('CONSTANT.startText'));
         var router = new Router();
         router.when('/#test', function(){
             Logger.log('test One');
@@ -21,6 +20,7 @@ define([
             Logger.log('error');
         });
         router.start();
+        var start = new StartCtrl().init();
 
         window.location.hash = 'test';
     };

@@ -4,8 +4,8 @@ require([
     require([
         'core/init',
         '_'
-    ], function(init, core){
+    ], function(init){
         "use strict";
-        init();
+        init();      
     });
 });

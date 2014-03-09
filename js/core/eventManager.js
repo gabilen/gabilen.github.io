@@ -4,9 +4,8 @@
  * вызов событий и удаления событий или обработчика
  */
 define([
-    '_',
-    'core/logger'
-], function (core, Logger) {
+    '_'
+], function (core) {
     "use strict";
     var EventManager = function () {
         this.listeners = {};
