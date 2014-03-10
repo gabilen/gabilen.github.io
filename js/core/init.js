@@ -24,7 +24,7 @@ define([
         router.start();
         
         router.remove('404');
-        router.pause();
+        router.stop();
         window.location.hash = 'test';
     };
 });

@@ -12,6 +12,7 @@ define([
     var Router = function () {
         this._routes = [];
         this._on = false;
+        this.listener = this.checkState.bind(this);
     };
     
     /**
@@ -35,10 +36,14 @@ define([
     * вешает обработчик на смену хеша
     */
     Router.prototype.start = function () {
-//        ie 9+
-        window.addEventListener("hashchange", this.checkState.bind(this));
+        if (this._on) {
+            return this;
+        }
+        
+        window.addEventListener("hashchange", this.listener, false);
         this._on = true;
         this.checkState();
+        
         return this;
     };
     /**
@@ -50,9 +55,9 @@ define([
         var i = this._routes.length;
         var found = false;
 
-        while(i--) {
+        while (i--) {
             var args = path.match(this._routes[i].pattern);
-            if(args){
+            if (args) {
                 found = true;
                 var func = this._routes[i].callback;
                 var funcArgs = args.slice(1);
@@ -60,7 +65,7 @@ define([
             }
         }
 
-        if(!found){
+        if (!found) {
             core.invoke(this.routes['404'].callback);
         }
         return found;
@@ -90,13 +95,14 @@ define([
     /**
     * Приостанавливает работу роутера 
     */
-    Router.prototype.pause = function () {
-        if (this._on) {
-            window.removeEventListener("hashchange", this.checkState.bind(this));
-        }else {
-            window.addEventListener("hashchange", this.checkState.bind(this));
+    Router.prototype.stop = function () {
+        if (!this._on) {
+            return this;
         }
+        window.removeEventListener("hashchange", this.listener, false);
         this._on = !this._on;
+        
+        return this;
     };
     
     return Router;

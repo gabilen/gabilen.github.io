@@ -1,7 +1,7 @@
 require(['spec_require_config'], function() {
     require([
-        'mocha'
-        , 'tests_list'
+        'mocha',
+		'tests_list'
     ],function(mocha, TestsList) {
         mocha.setup('bdd');
         mocha.checkLeaks();
