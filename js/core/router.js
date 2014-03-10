@@ -12,7 +12,6 @@ define([
     var Router = function () {
         this._routes = [];
         this._on = false;
-        this.listener = this.checkState.bind(this);
     };
     
     /**
@@ -37,6 +36,9 @@ define([
     */
     Router.prototype.start = function () {
         if (this._on) {
+            if (!this.listener) {
+                this.listener = this.checkState.bind(this);
+            }
             return this;
         }
         
@@ -100,7 +102,7 @@ define([
             return this;
         }
         window.removeEventListener("hashchange", this.listener, false);
-        this._on = !this._on;
+        this._on = false;
         
         return this;
     };
