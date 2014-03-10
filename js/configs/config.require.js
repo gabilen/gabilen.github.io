@@ -4,7 +4,7 @@ require.config({
     paths: {
         '_': 'core/core',
         'config': 'configs/config',
-        'react': 'lib/react',
+        'react': 'lib/react/react',
         'startapp' : 'controller/start.ctrl'
     }
 });

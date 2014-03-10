@@ -10,22 +10,21 @@ define([
     "use strict";
     
     var Router = function () {
-        this.routes = {};
         this._routes = [];
+        this._on = false;
     };
-     
+    
     /**
     * Добавление пути и функции обратного вызова
     * @param {string} url путь роутинга
     * @param {function} callback Функция обратного вызова
     */
     Router.prototype.when = function (url, callback) {
-        if( typeof url === 'string' && typeof callback === 'function') {
-            this.routes[url] = {};
-            this.routes[url].callback = callback;
+        if (typeof url === 'string' && typeof callback === 'function') {
             this._routes.push({
+                url: url,
                 pattern: new RegExp('^'+url.replace(/:\w+/g, '(\\w+)').replace(/\//g, '\\/')+'$'),
-                callback: this.routes[url].callback
+                callback: callback
             });
         }
         return this;
@@ -36,7 +35,9 @@ define([
     * вешает обработчик на смену хеша
     */
     Router.prototype.start = function () {
-        window.addEventListener("hashchange", this.checkState.bind(this), false);
+//        ie 9+
+        window.addEventListener("hashchange", this.checkState.bind(this));
+        this._on = true;
         this.checkState();
         return this;
     };
@@ -53,7 +54,9 @@ define([
             var args = path.match(this._routes[i].pattern);
             if(args){
                 found = true;
-                core.invoke.apply(this,[].concat(this._routes[i].callback, args.slice(1)));
+                var func = this._routes[i].callback;
+                var funcArgs = args.slice(1);
+                core.invoke.apply(this,[].concat(func, funcArgs));
             }
         }
 
@@ -61,6 +64,39 @@ define([
             core.invoke(this.routes['404'].callback);
         }
         return found;
+    };
+    /**
+    * Удаляет маршрут из карты вместе с обработчиком 
+    * @param {string} url путь роутинга
+    * @return {bool} возвращает неуспешное удаление маршрута
+    * @return {number} возвращает номер удаленного маршрута
+    */
+    Router.prototype.remove = function (url) {
+        var found = false;
+        if (typeof url !== 'string') {
+            return found;
+        }
+        
+        this._routes.forEach(function (element, index, array) {
+            if (element.url === url) {
+                found = index;
+            }
+        });
+        if (found !== false) {
+            this._routes.splice(found, 1);
+        }
+        return found;
+    };
+    /**
+    * Приостанавливает работу роутера 
+    */
+    Router.prototype.pause = function () {
+        if (this._on) {
+            window.removeEventListener("hashchange", this.checkState.bind(this));
+        }else {
+            window.addEventListener("hashchange", this.checkState.bind(this));
+        }
+        this._on = !this._on;
     };
     
     return Router;

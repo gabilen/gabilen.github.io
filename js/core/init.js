@@ -2,26 +2,29 @@ define([
     'core/router',
     'startapp',
     'core/logger'
-], function(Router, StartCtrl, Logger){
-    return function(){
+], function(Router, StartCtrl, Logger) {
+    return function() {
+        "use strict";
+        
         var router = new Router();
-        router.when('/#test', function(){
+        var start = new StartCtrl().init();
+        
+        router.when('/#test', function() {
             Logger.log('test One');
         });
-        router.when('/#test2/:name/:id', function(name, id){
+        router.when('/#test2/:name/:id', function(name, id) {
             Logger.log('test Two');
-            Logger.log(name);
-            Logger.log(id);
         });
-        router.when('/', function(){
+        router.when('/', function() {
             Logger.log('main');
         });
-         router.when('404', function(){
+         router.when('404', function() {
             Logger.log('error');
         });
         router.start();
-        var start = new StartCtrl().init();
-
+        
+        router.remove('404');
+        router.pause();
         window.location.hash = 'test';
     };
 });

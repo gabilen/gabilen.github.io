@@ -1,6 +1,6 @@
 define([
     'react'
-    , 'eventManager'
+    , 'core/eventManager'
 ], function(React, EventManager) {
     "use strict";
     return function AbstractView(View) {
