@@ -68,7 +68,9 @@ define([
         }
 
         if (!found) {
-            core.invoke(this.routes['404'].callback);
+            if (this._routes['404']) {
+                core.invoke(this.routes['404'].callback);
+            }
         }
         return found;
     };

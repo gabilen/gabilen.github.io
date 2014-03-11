@@ -1,7 +1,7 @@
 define([
-    'chai'
-    , 'core/Logger'
-    , 'sinon'
+    'chai',
+    'core/Logger',
+    'sinon'
 ], function(chai, LOGGER, sinon) {
     describe('LOGGER', function() {
         it('log()', function() {
