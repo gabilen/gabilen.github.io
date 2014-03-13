@@ -65,7 +65,7 @@ define([
     * @return {bool} возвращает результат навигации
     */
     Router.prototype.checkState = function () {
-        var path = '/' + Router.prototype.getHash();
+        var path = '/' + this.getHash();
 		console.log(path);
         var i = this._routes.length;
         var found = false;

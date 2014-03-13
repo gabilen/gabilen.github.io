@@ -7,7 +7,6 @@ define([
     var assert = chai.assert;
     
     describe('Router', function () {
-        
         describe('when(url, callback)', function () {
             var router = new Router();
             var callback = function () {
@@ -32,9 +31,7 @@ define([
                 expect(router._routes[0].callback).to.be.instanceof(Function);
                 expect(router._routes[0].callback.apply(null)).to.equal(123);
             });
-            
         });
-        
         describe('start()', function () {
             var router = new Router();
             it('router._on should be true', function () {
@@ -49,30 +46,24 @@ define([
 				assert.equal(true, router.checkState.calledOnce, 'checkState function must run');
 				router.checkState.restore();
 				router.stop();
-                //не уверен что правильно работает..
             });
         });
-        
         describe('checkState()', function () {
             var router = new Router();
             var callback = function (name, id) {
             	return name + '_' + id;
         	};
-            router.when('/#test2/:name/:id', callback);
-			
+            router.when('/#test2/:name/:id', callback);			
             it('should run callback function', function () {
 				var stub = sinon.stub(router, "getHash", function() {
 					return '#test2/Victor/7';
 				});
                 router.start();
-//				console.log(router.getHash());
-//				console.log(router.checkState());
 				assert.equal('Victor_7', router.checkState(), 'must run callback of tested url');
 				router.getHash.restore();
 				router.stop();
             });
         });
-        
         describe('remove(url)', function () {
             var router = new Router();
             it('existed route will be removed', function () {
@@ -87,7 +78,6 @@ define([
                 expect(router._routes).to.be.empty;
             });
         });
-        
         describe('stop()', function () {
             var router = new Router();
             it('router._on should be false', function () {
@@ -95,17 +85,7 @@ define([
                 expect(router._on).to.be.true;
                 router.stop();
                 expect(router._on).to.be.false;
-
             });
-//			it('router.checkState function must not be run', function () {
-//				router.start();
-//				var spy = sinon.spy(router, "checkState");
-//				router.stop();
-//				assert.equal(0, router.checkState.callCount, 'checkState function must run');
-//				router.checkState.restore();
-//                //не уверен что правильно работает..
-//            });
         });
-        
     });
 });
