@@ -7,9 +7,9 @@ define([
     var assert = chai.assert;
     
     describe('Router', function () {
-        var router = new Router();
         
         describe('when(url, callback)', function () {
+            var router = new Router();
             var callback = function () {
                 return 123;
             };
@@ -29,28 +29,52 @@ define([
                 expect(router._routes[0].pattern).to.deep.equal(/^\/#test$/);
             });    
             it('router._routes array[0].callback should be a function', function () {
-                expect(router._routes[0].callback).to.be.instanceof(Function); // isFunction ?
-//                assert.isFunction(callback);
-//                assert.isFunction(router._routes[0].callback);
+                expect(router._routes[0].callback).to.be.instanceof(Function);
+                expect(router._routes[0].callback.apply(null)).to.equal(123);
             });
             
         });
         
         describe('start()', function () {
+            var router = new Router();
             it('router._on should be true', function () {
                 expect(router._on).to.be.false;
                 router.start();
                 expect(router._on).to.be.true;
+				router.stop();
+            });				
+			it('router.checkState function must run once', function () {
+				var spy = sinon.spy(router, "checkState");
+				router.start();
+				assert.equal(true, router.checkState.calledOnce, 'checkState function must run');
+				router.checkState.restore();
+				router.stop();
+                //не уверен что правильно работает..
             });
         });
         
         describe('checkState()', function () {
+            var router = new Router();
+            var callback = function (name, id) {
+            	return name + '_' + id;
+        	};
+            router.when('/#test2/:name/:id', callback);
+			
             it('should run callback function', function () {
-                expect(1).to.be.false;
+				var stub = sinon.stub(router, "getHash", function() {
+					return '#test2/Victor/7';
+				});
+                router.start();
+//				console.log(router.getHash());
+//				console.log(router.checkState());
+				assert.equal('Victor_7', router.checkState(), 'must run callback of tested url');
+				router.getHash.restore();
+				router.stop();
             });
         });
         
         describe('remove(url)', function () {
+            var router = new Router();
             it('existed route will be removed', function () {
                 var callback = function () {
                     return 123;
@@ -65,12 +89,22 @@ define([
         });
         
         describe('stop()', function () {
+            var router = new Router();
             it('router._on should be false', function () {
                 router.start();
                 expect(router._on).to.be.true;
                 router.stop();
                 expect(router._on).to.be.false;
+
             });
+//			it('router.checkState function must not be run', function () {
+//				router.start();
+//				var spy = sinon.spy(router, "checkState");
+//				router.stop();
+//				assert.equal(0, router.checkState.callCount, 'checkState function must run');
+//				router.checkState.restore();
+//                //не уверен что правильно работает..
+//            });
         });
         
     });

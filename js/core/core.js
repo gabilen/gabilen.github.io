@@ -53,10 +53,9 @@ define([], function () {
                 return this;
             }
 
-            callback instanceof Array 
+            return Array.isArray(callback)
                 ? callback[1].apply(callback[0], Array.prototype.slice.call(arguments, 1))
                 : callback.apply(this, Array.prototype.slice.call(arguments, 1));
-            return this;
         };
     };
 });

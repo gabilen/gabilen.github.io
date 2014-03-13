@@ -13,14 +13,26 @@ define([
         this._routes = [];
         this._on = false;
     };
-    
+    /**
+    * Возвращает хеш урла
+    * написана для удобного юнит-тестирования
+    * @return {string} возвращает хеш урла
+    */
+    Router.prototype.getHash = function () {
+      return window.location.hash;
+    };    
     /**
     * Добавление пути и функции обратного вызова
     * @param {string} url путь роутинга
     * @param {function} callback Функция обратного вызова
     */
     Router.prototype.when = function (url, callback) {
-        if (typeof url === 'string' && typeof callback === 'function') {
+        var isCallback = Array.isArray(callback)
+            && ((callback[0] === null) || typeof(callback[0]) === "object")
+            && callback[1] instanceof Function;
+        
+        if (typeof url === 'string'
+            && (typeof callback === 'function') || isCallback) {
             this._routes.push({
                 url: url,
                 pattern: new RegExp('^'+url.replace(/:\w+/g, '(\\w+)').replace(/\//g, '\\/')+'$'),
@@ -36,10 +48,10 @@ define([
     */
     Router.prototype.start = function () {
         if (this._on) {
-            if (!this.listener) {
-                this.listener = this.checkState.bind(this);
-            }
             return this;
+        }
+        if (!this.listener) {
+            this.listener = this.checkState.bind(this);
         }
         
         window.addEventListener("hashchange", this.listener, false);
@@ -53,17 +65,18 @@ define([
     * @return {bool} возвращает результат навигации
     */
     Router.prototype.checkState = function () {
-        var path = '/' + location.hash;
+        var path = '/' + Router.prototype.getHash();
+		console.log(path);
         var i = this._routes.length;
         var found = false;
 
         while (i--) {
             var args = path.match(this._routes[i].pattern);
             if (args) {
-                found = true;
+                //found = true;
                 var func = this._routes[i].callback;
                 var funcArgs = args.slice(1);
-                core.invoke.apply(this,[].concat(func, funcArgs));
+                return core.invoke.apply(this,[].concat(func, funcArgs));
             }
         }
 
@@ -108,6 +121,6 @@ define([
         
         return this;
     };
-    
+
     return Router;
 });

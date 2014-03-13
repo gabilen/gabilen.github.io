@@ -22,9 +22,15 @@ define([
         if (!this.listeners.hasOwnProperty(event)) {
             this.listeners[event] = [];
         }
-        if (callback instanceof Function) {
+        
+        var isCallback = Array.isArray(callback)
+            && ((callback[0] === null) || typeof(callback[0]) === "object")
+            && callback[1] instanceof Function;
+        
+        if (callback instanceof Function || isCallback) {
             this.listeners[event].push(callback);
         }
+
         return this;
     };
     /**
