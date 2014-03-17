@@ -31,8 +31,8 @@ define([
             && ((callback[0] === null) || typeof(callback[0]) === "object")
             && callback[1] instanceof Function;
         
-        if (typeof url === 'string'
-            && (typeof callback === 'function') || isCallback) {
+		var valid = typeof url === 'string' && ((typeof callback === 'function') || isCallback);
+        if (valid) {
             this._routes.push({
                 url: url,
                 pattern: new RegExp('^'+url.replace(/:\w+/g, '(\\w+)').replace(/\//g, '\\/')+'$'),
@@ -66,14 +66,12 @@ define([
     */
     Router.prototype.checkState = function () {
         var path = '/' + this.getHash();
-		console.log(path);
         var i = this._routes.length;
         var found = false;
 
         while (i--) {
             var args = path.match(this._routes[i].pattern);
             if (args) {
-                //found = true;
                 var func = this._routes[i].callback;
                 var funcArgs = args.slice(1);
                 return core.invoke.apply(this,[].concat(func, funcArgs));

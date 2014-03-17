@@ -51,8 +51,8 @@ define([
         describe('checkState()', function () {
             var router = new Router();
             var callback = function (name, id) {
-            	return name + '_' + id;
-        	};
+				return name + '_' + id;
+			};
             router.when('/#test2/:name/:id', callback);			
             it('should run callback function', function () {
 				var stub = sinon.stub(router, "getHash", function() {
