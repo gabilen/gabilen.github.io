@@ -52,20 +52,21 @@ define([
      * @param {string} callback Имя удаляеммой функции из события
      */
     EventManager.prototype.off = function (event, callback) {
-        if (this.listeners.hasOwnProperty(event)) {
-            if (!callback) {
-                delete this.listeners[event];
-            } else {
-                var self = this;
-                var id = null;
-                this.listeners[event].forEach(function offEvent (element, index, array) {
-                    if (element.toString() === callback.toString()) {
-                        id = index;
-                    }
-                });
-                if (id) {
-                    self.listeners[event].splice(id, 1);
+        if (!this.listeners.hasOwnProperty(event)) {
+            return this;
+        }
+        if (!callback) {
+            delete this.listeners[event];
+        } else {
+            var self = this;
+            var id = null;
+            this.listeners[event].forEach(function offEvent (element, index, array) {
+                if (element.toString() === callback.toString()) {
+                    id = index;
                 }
+            });
+            if (id) {
+                self.listeners[event].splice(id, 1);
             }
         }
     };

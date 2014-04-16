@@ -39,8 +39,8 @@ define([
                 router.start();
                 expect(router._on).to.be.true;
 				router.stop();
-            });				
-			it('router.checkState function must run once', function () {
+            });
+            it('router.checkState function must run once', function () {
 				var spy = sinon.spy(router, "checkState");
 				router.start();
 				assert.equal(true, router.checkState.calledOnce, 'checkState function must run');

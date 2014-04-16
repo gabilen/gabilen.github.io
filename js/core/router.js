@@ -31,7 +31,7 @@ define([
             && ((callback[0] === null) || typeof(callback[0]) === "object")
             && callback[1] instanceof Function;
         
-		var valid = typeof url === 'string' && ((typeof callback === 'function') || isCallback);
+        var valid = typeof url === 'string' && ((typeof callback === 'function') || isCallback);
         if (valid) {
             this._routes.push({
                 url: url,
@@ -78,10 +78,8 @@ define([
             }
         }
 
-        if (!found) {
-            if (this._routes['404']) {
-                core.invoke(this.routes['404'].callback);
-            }
+        if (!found && this._routes['404']) {
+            core.invoke(this.routes['404'].callback);
         }
         return found;
     };
